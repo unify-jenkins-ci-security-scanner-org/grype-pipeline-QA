@@ -6,6 +6,10 @@ pipeline {
         GRYPE_SCAN_TARGET = "${env.WORKSPACE}/test-workflow-ninja"
         GRYPE_REPORT = "grype-report.sarif"
     }
+    
+    triggers {
+        cron '15 02 * * 1-5' // Runs at 02:15 on every day-of-week from Monday through Friday
+         }
 
     stages {
         stage('Install Grype') {
