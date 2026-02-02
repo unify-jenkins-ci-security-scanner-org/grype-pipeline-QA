@@ -54,7 +54,12 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: "${GRYPE_REPORT}", fingerprint: true
+                    registerSecurityScan(
+                        artifacts: '${GRYPE_REPORT}',
+                        format: 'sarif',
+                        archive: true
+                    )
+             // archiveArtifacts artifacts: "${GRYPE_REPORT}", fingerprint: true
         }
     }
 }
