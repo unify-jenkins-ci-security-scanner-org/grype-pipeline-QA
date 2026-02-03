@@ -50,16 +50,26 @@ pipeline {
                 '''
             }
         }
-    }
-
-    post {
-        always {
-                    registerSecurityScan(
-                        artifacts: '${GRYPE_REPORT}',
-                        format: 'sarif',
-                        archive: true
-                    )
-             // archiveArtifacts artifacts: "${GRYPE_REPORT}", fingerprint: true
+        stage('Security Scan') {
+            steps {
+                registerSecurityScan(
+                    // Security Scan to include
+                    artifacts: '${GRYPE_REPORT}',
+                    format: "sarif",
+                    archive: true
+                )
+            }
         }
     }
+
+    // post {
+    //     always {
+    //                 registerSecurityScan(
+    //                     artifacts: '${GRYPE_REPORT}',
+    //                     format: 'sarif',
+    //                     archive: true
+    //                 )
+    //          // archiveArtifacts artifacts: "${GRYPE_REPORT}", fingerprint: true
+    //     }
+    // }
 }
