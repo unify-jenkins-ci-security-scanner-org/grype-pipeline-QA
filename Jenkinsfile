@@ -54,7 +54,7 @@ pipeline {
             steps {
                 registerSecurityScan(
                     // Security Scan to include
-                    artifacts: '${GRYPE_REPORT}',
+                    artifacts: "${GRYPE_REPORT}",
                     format: "sarif",
                     archive: true
                 )
